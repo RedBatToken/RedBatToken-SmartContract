@@ -1,12 +1,12 @@
 # RedBatToken-SmartContract
 Red Bat Token's SmartContract
 
-// SPDX-License-Identifier: MIT
+    // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.6.12;
-pragma experimental ABIEncoderV2;
+    pragma solidity ^0.6.12;
+    pragma experimental ABIEncoderV2;
 
-interface IERC20 {
+    interface IERC20 {
 
     function totalSupply() external view returns (uint256);
 
