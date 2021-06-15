@@ -73,36 +73,36 @@ interface IERC20 {
      * a call to {approve}. `value` is the new allowance.
      */
     event Approval(address indexed owner, address indexed spender, uint256 value);
-}
+    }
 
-/**
- * @dev Wrappers over Solidity's arithmetic operations with added overflow
- * checks.
- *
- * Arithmetic operations in Solidity wrap on overflow. This can easily result
- * in bugs, because programmers usually assume that an overflow raises an
- * error, which is the standard behavior in high level programming languages.
- * `SafeMath` restores this intuition by reverting the transaction when an
- * operation overflows.
- *
- * Using this library instead of the unchecked operations eliminates an entire
- * class of bugs, so it's recommended to use it always.
- */
- 
-library SafeMath {
     /**
-     * @dev Returns the addition of two unsigned integers, reverting on
-     * overflow.
+     * @dev Wrappers over Solidity's arithmetic operations with added overflow
+     * checks.
      *
-     * Counterpart to Solidity's `+` operator.
+     * Arithmetic operations in Solidity wrap on overflow. This can easily result
+     * in bugs, because programmers usually assume that an overflow raises an
+     * error, which is the standard behavior in high level programming languages.
+     * `SafeMath` restores this intuition by reverting the transaction when an
+     * operation overflows.
      *
-     * Requirements:
-     *
-     * - Addition cannot overflow.
+     * Using this library instead of the unchecked operations eliminates an entire
+     * class of bugs, so it's recommended to use it always.
      */
-    function add(uint256 a, uint256 b) internal pure returns (uint256) {
-        uint256 c = a + b;
-        require(c >= a, "SafeMath: addition overflow");
+
+    library SafeMath {
+        /**
+         * @dev Returns the addition of two unsigned integers, reverting on
+         * overflow.
+         *
+         * Counterpart to Solidity's `+` operator.
+         *
+         * Requirements:
+         *
+         * - Addition cannot overflow.
+         */
+        function add(uint256 a, uint256 b) internal pure returns (uint256) {
+            uint256 c = a + b;
+            require(c >= a, "SafeMath: addition overflow");
 
         return c;
     }
@@ -230,51 +230,51 @@ library SafeMath {
         require(b != 0, errorMessage);
         return a % b;
     }
-}
-
-abstract contract Context {
-    function _msgSender() internal view virtual returns (address payable) {
-        return msg.sender;
     }
+
+    abstract contract Context {
+        function _msgSender() internal view virtual returns (address payable) {
+            return msg.sender;
+        }
 
     function _msgData() internal view virtual returns (bytes memory) {
         this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691
         return msg.data;
     }
-}
-
-
-/**
- * @dev Collection of functions related to the address type
- */
-library Address {
-    /**
-     * @dev Returns true if `account` is a contract.
-     *
-     * [IMPORTANT]
-     * ====
-     * It is unsafe to assume that an address for which this function returns
-     * false is an externally-owned account (EOA) and not a contract.
-     *
-     * Among others, `isContract` will return false for the following
-     * types of addresses:
-     *
-     *  - an externally-owned account
-     *  - a contract in construction
-     *  - an address where a contract will be created
-     *  - an address where a contract lived, but was destroyed
-     * ====
-     */
-    function isContract(address account) internal view returns (bool) {
-        // According to EIP-1052, 0x0 is the value returned for not-yet created accounts
-        // and 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 is returned
-        // for accounts without code, i.e. `keccak256('')`
-        bytes32 codehash;
-        bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
-        // solhint-disable-next-line no-inline-assembly
-        assembly { codehash := extcodehash(account) }
-        return (codehash != accountHash && codehash != 0x0);
     }
+
+
+    /**
+     * @dev Collection of functions related to the address type
+     */
+    library Address {
+        /**
+         * @dev Returns true if `account` is a contract.
+         *
+         * [IMPORTANT]
+         * ====
+         * It is unsafe to assume that an address for which this function returns
+         * false is an externally-owned account (EOA) and not a contract.
+         *
+         * Among others, `isContract` will return false for the following
+         * types of addresses:
+         *
+         *  - an externally-owned account
+         *  - a contract in construction
+         *  - an address where a contract will be created
+         *  - an address where a contract lived, but was destroyed
+         * ====
+         */
+        function isContract(address account) internal view returns (bool) {
+            // According to EIP-1052, 0x0 is the value returned for not-yet created accounts
+            // and 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470 is returned
+            // for accounts without code, i.e. `keccak256('')`
+            bytes32 codehash;
+            bytes32 accountHash = 0xc5d2460186f7233c927e7db2dcc703c0e500b653ca82273b7bfad8045d85a470;
+            // solhint-disable-next-line no-inline-assembly
+            assembly { codehash := extcodehash(account) }
+            return (codehash != accountHash && codehash != 0x0);
+        }
 
     /**
      * @dev Replacement for Solidity's `transfer`: sends `amount` wei to
@@ -380,24 +380,24 @@ library Address {
             }
         }
     }
-}
+    }
 
-/**
- * @dev Contract module which provides a basic access control mechanism, where
- * there is an account (an owner) that can be granted exclusive access to
- * specific functions.
- *
- * By default, the owner account will be the one that deploys the contract. This
- * can later be changed with {transferOwnership}.
- *
- * This module is used through inheritance. It will make available the modifier
- * `onlyOwner`, which can be applied to your functions to restrict their use to
- * the owner.
- */
-contract Ownable is Context {
-    address private _owner;
-    address private _previousOwner;
-    uint256 private _lockTime;
+    /**
+     * @dev Contract module which provides a basic access control mechanism, where
+     * there is an account (an owner) that can be granted exclusive access to
+     * specific functions.
+     *
+     * By default, the owner account will be the one that deploys the contract. This
+     * can later be changed with {transferOwnership}.
+     *
+     * This module is used through inheritance. It will make available the modifier
+     * `onlyOwner`, which can be applied to your functions to restrict their use to
+     * the owner.
+     */
+    contract Ownable is Context {
+        address private _owner;
+        address private _previousOwner;
+        uint256 private _lockTime;
 
     event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
 
@@ -466,12 +466,12 @@ contract Ownable is Context {
         emit OwnershipTransferred(_owner, _previousOwner);
         _owner = _previousOwner;
     }
-}
+    }
 
-// pragma solidity >=0.5.0;
+    // pragma solidity >=0.5.0;
 
-interface IUniswapV2Factory {
-    event PairCreated(address indexed token0, address indexed token1, address pair, uint);
+    interface IUniswapV2Factory {
+        event PairCreated(address indexed token0, address indexed token1, address pair, uint);
 
     function feeTo() external view returns (address);
     function feeToSetter() external view returns (address);
@@ -484,14 +484,14 @@ interface IUniswapV2Factory {
 
     function setFeeTo(address) external;
     function setFeeToSetter(address) external;
-}
+    }
 
 
-// pragma solidity >=0.5.0;
+    // pragma solidity >=0.5.0;
 
-interface IUniswapV2Pair {
-    event Approval(address indexed owner, address indexed spender, uint value);
-    event Transfer(address indexed from, address indexed to, uint value);
+    interface IUniswapV2Pair {
+        event Approval(address indexed owner, address indexed spender, uint value);
+        event Transfer(address indexed from, address indexed to, uint value);
 
     function name() external pure returns (string memory);
     function symbol() external pure returns (string memory);
@@ -538,13 +538,13 @@ interface IUniswapV2Pair {
     function sync() external;
 
     function initialize(address, address) external;
-}
+    }
 
-// pragma solidity >=0.6.2;
+    // pragma solidity >=0.6.2;
 
-interface IUniswapV2Router01 {
-    function factory() external pure returns (address);
-    function WETH() external pure returns (address);
+    interface IUniswapV2Router01 {
+        function factory() external pure returns (address);
+        function WETH() external pure returns (address);
 
     function addLiquidity(
         address tokenA,
@@ -634,30 +634,30 @@ interface IUniswapV2Router01 {
     function getAmountIn(uint amountOut, uint reserveIn, uint reserveOut) external pure returns (uint amountIn);
     function getAmountsOut(uint amountIn, address[] calldata path) external view returns (uint[] memory amounts);
     function getAmountsIn(uint amountOut, address[] calldata path) external view returns (uint[] memory amounts);
-}
+    }
 
 
 
-// pragma solidity >=0.6.2;
+    // pragma solidity >=0.6.2;
 
-interface IUniswapV2Router02 is IUniswapV2Router01 {
-    function removeLiquidityETHSupportingFeeOnTransferTokens(
-        address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
-        address to,
-        uint deadline
-    ) external returns (uint amountETH);
-    function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(
-        address token,
-        uint liquidity,
-        uint amountTokenMin,
-        uint amountETHMin,
-        address to,
-        uint deadline,
-        bool approveMax, uint8 v, bytes32 r, bytes32 s
-    ) external returns (uint amountETH);
+    interface IUniswapV2Router02 is IUniswapV2Router01 {
+        function removeLiquidityETHSupportingFeeOnTransferTokens(
+            address token,
+            uint liquidity,
+            uint amountTokenMin,
+            uint amountETHMin,
+            address to,
+            uint deadline
+        ) external returns (uint amountETH);
+        function removeLiquidityETHWithPermitSupportingFeeOnTransferTokens(
+            address token,
+            uint liquidity,
+            uint amountTokenMin,
+            uint amountETHMin,
+            address to,
+            uint deadline,
+            bool approveMax, uint8 v, bytes32 r, bytes32 s
+        ) external returns (uint amountETH);
 
     function swapExactTokensForTokensSupportingFeeOnTransferTokens(
         uint amountIn,
@@ -679,21 +679,21 @@ interface IUniswapV2Router02 is IUniswapV2Router01 {
         address to,
         uint deadline
     ) external;
-}
+    }
 
 
-contract LiquidityGeneratorToken is Context, IERC20, Ownable {
-    using SafeMath for uint256;
-    using Address for address;
-    address dead = 0x000000000000000000000000000000000000dEaD;
-    uint256 public maxLiqFee = 10;
-    uint256 public maxTaxFee = 10;
-    uint256 public minMxTxPercentage = 50;
-    uint256 public prevLiqFee;
-    uint256 public prevTaxFee;
-    mapping (address => uint256) private _rOwned;
-    mapping (address => uint256) private _tOwned;
-    mapping (address => mapping (address => uint256)) private _allowances;
+    contract LiquidityGeneratorToken is Context, IERC20, Ownable {
+        using SafeMath for uint256;
+        using Address for address;
+        address dead = 0x000000000000000000000000000000000000dEaD;
+        uint256 public maxLiqFee = 10;
+        uint256 public maxTaxFee = 10;
+        uint256 public minMxTxPercentage = 50;
+        uint256 public prevLiqFee;
+        uint256 public prevTaxFee;
+        mapping (address => uint256) private _rOwned;
+        mapping (address => uint256) private _tOwned;
+        mapping (address => mapping (address => uint256)) private _allowances;
 
     mapping (address => bool) private _isExcludedFromFee;
 
